@@ -1,0 +1,14 @@
+query LoadUser($where: users_bool_exp = {}) {
+  users(where: $where) {
+    id
+    username
+  }
+}
+
+query LoadPosts($where: posts_bool_exp!) {
+  posts(where: $where) {
+    id
+    title
+    body
+  }
+}

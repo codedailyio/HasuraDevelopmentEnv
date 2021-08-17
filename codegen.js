@@ -1,30 +1,12 @@
 module.exports = {
   overwrite: true,
   generates: {
-    "./src/anonymous/index.tsx": {
-      schema: "http://localhost:8080/v1/graphql",
-      documents: ["./src/anonymous/**/*.graphql"],
-      plugins: [
-        "typescript",
-        "typescript-operations",
-        "typescript-react-apollo",
-      ],
-      config: {
-        preResolveTypes: true,
-        skipTypename: false,
-        withHooks: true,
-        withHOC: false,
-        withComponent: false,
-        constEnums: true,
-        reactApolloVersion: 3,
-      },
-    },
-    "./src/user/index.tsx": {
+    "./src/user.tsx": {
       schema: [
         {
           "http://localhost:8080/v1/graphql": {
             headers: {
-              "x-hasura-role": "account",
+              "x-hasura-role": "user",
               "x-hasura-admin-secret": "admin_secret",
             },
           },
@@ -47,7 +29,7 @@ module.exports = {
         reactApolloVersion: 3,
       },
     },
-    "./src/admin/index.ts": {
+    "./src/admin.ts": {
       schema: [
         {
           "http://localhost:8080/v1/graphql": {
