@@ -1,0 +1,28 @@
+{
+  "name": "hasura-dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "codegen.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codedailyio/HasuraDevelopmentEnv.git"
+  },
+  "keywords": [],
+  "author": "Jason Brown",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codedailyio/HasuraDevelopmentEnv/issues"
+  },
+  "homepage": "https://github.com/codedailyio/HasuraDevelopmentEnv#readme",
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.0.1",
+    "@graphql-codegen/typescript": "^2.0.0",
+    "@graphql-codegen/typescript-graphql-request": "^4.0.0",
+    "@graphql-codegen/typescript-operations": "^2.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^3.0.0",
+    "graphql": "^15.5.1"
+  }
+}
