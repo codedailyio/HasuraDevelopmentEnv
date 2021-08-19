@@ -12,3 +12,12 @@ query LoadPosts($where: posts_bool_exp!) {
     body
   }
 }
+
+mutation InsertPost($post: posts_insert_input!) {
+  insert_posts_one(object: $post) {
+    id
+    title
+    body
+    user_id
+  }
+}

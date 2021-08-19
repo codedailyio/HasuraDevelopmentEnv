@@ -24,5 +24,9 @@
     "@graphql-codegen/typescript-operations": "^2.0.1",
     "@graphql-codegen/typescript-react-apollo": "^3.0.0",
     "graphql": "^15.5.1"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.4.8",
+    "graphql-request": "^3.5.0"
   }
 }
