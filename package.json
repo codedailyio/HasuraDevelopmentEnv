@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "HASURA_ENDPOINT=http://localhost:8080/v1/graphql jest",
+    "test:ci": "HASURA_ENDPOINT=http://172.17.0.1:8080/v1/graphql jest"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "^3.0.0",
+    "jest": "^27.0.6"
+  }
+}

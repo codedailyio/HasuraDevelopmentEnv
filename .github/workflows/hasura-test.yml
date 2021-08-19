@@ -1,0 +1,83 @@
+name: Hasura Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "hasura/**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: kartoza/postgis:12.4
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASS: postgrespassword
+          POSTGRES_DBNAME: postgres
+        options: --health-cmd pg_isready --health-interval 30s --health-retries 12
+        ports:
+          - 5432:5432
+      hasura:
+        image: hasura/graphql-engine:v2.0.7
+        env:
+          HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+          HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+          HASURA_GRAPHQL_DEV_MODE: "true"
+          HASURA_GRAPHQL_LOG_LEVEL: debug
+          HASURA_GRAPHQL_ENABLED_APIS: "metadata,graphql"
+          HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+          HASURA_GRAPHQL_ADMIN_SECRET: admin_secret
+        ports:
+          - 8080:8080
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: c-hive/gha-yarn-cache@v2
+        with:
+          directory: hasura
+
+      - name: Hasura CI/CD
+        uses: browniefed/hasura-runner@master
+        with:
+          args: metadata apply
+        env:
+          PATH_TO_HASURA_PROJECT_ROOT: ./hasura
+          HASURA_CLI_VERSION: v2.0.7
+          HASURA_ENDPOINT: http://172.17.0.1:8080
+          HASURA_ADMIN_SECRET: admin_secret
+
+      - name: Hasura CI/CD
+        uses: browniefed/hasura-runner@master
+        with:
+          args: migrate apply --database-name default
+        env:
+          PATH_TO_HASURA_PROJECT_ROOT: ./hasura
+          HASURA_CLI_VERSION: v2.0.7
+          HASURA_ENDPOINT: http://172.17.0.1:8080
+          HASURA_ADMIN_SECRET: admin_secret
+
+      - name: Hasura CI/CD
+        uses: browniefed/hasura-runner@master
+        with:
+          args: metadata reload
+        env:
+          PATH_TO_HASURA_PROJECT_ROOT: ./hasura
+          HASURA_CLI_VERSION: v2.0.7
+          HASURA_ENDPOINT: http://172.17.0.1:8080
+          HASURA_ADMIN_SECRET: admin_secret
+
+      - name: Hasura CI/CD
+        uses: browniefed/hasura-runner@master
+        with:
+          args: seeds apply --database-name default
+        env:
+          PATH_TO_HASURA_PROJECT_ROOT: ./hasura
+          HASURA_CLI_VERSION: v2.0.7
+          HASURA_ENDPOINT: http://172.17.0.1:8080
+          HASURA_ADMIN_SECRET: admin_secret
+
+      - name: Run unit tests
+        run: yarn test:ci
+        working-directory: hasura
