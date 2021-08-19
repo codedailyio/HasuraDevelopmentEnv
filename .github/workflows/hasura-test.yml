@@ -33,10 +33,7 @@ jobs:
           - 8080:8080
     steps:
       - uses: actions/checkout@v2
-
       - uses: c-hive/gha-yarn-cache@v2
-        with:
-          directory: hasura
 
       - name: Hasura CI/CD
         uses: browniefed/hasura-runner@master
