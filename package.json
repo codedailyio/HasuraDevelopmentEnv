@@ -1,0 +1,24 @@
+{
+  "name": "hasura-dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codedailyio/HasuraDevelopmentEnv.git"
+  },
+  "keywords": [],
+  "author": "Jason Brown",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codedailyio/HasuraDevelopmentEnv/issues"
+  },
+  "homepage": "https://github.com/codedailyio/HasuraDevelopmentEnv#readme",
+  "dependencies": {
+    "apollo-server-micro": "^3.1.2",
+    "graphql": "^15.5.1",
+    "micro": "^9.3.4",
+    "micro-cors": "^0.1.1"
+  }
+}
