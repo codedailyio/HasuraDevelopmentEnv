@@ -17,6 +17,7 @@
   "homepage": "https://github.com/codedailyio/HasuraDevelopmentEnv#readme",
   "dependencies": {
     "apollo-server-micro": "^3.1.2",
+    "aws-sdk": "^2.972.0",
     "graphql": "^15.5.1",
     "micro": "^9.3.4",
     "micro-cors": "^0.1.1"

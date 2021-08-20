@@ -1,0 +1,13 @@
+table:
+  name: files
+  schema: public
+remote_relationships:
+- definition:
+    hasura_fields:
+    - filePath
+    remote_field:
+      get_file:
+        arguments:
+          filePath: $filePath
+    remote_schema: FilesAPI
+  name: file
