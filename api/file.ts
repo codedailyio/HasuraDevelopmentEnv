@@ -1,10 +1,6 @@
 import { ApolloServer, gql } from "apollo-server-micro";
-import { send } from "micro";
-import microCors from "micro-cors";
 import { Credentials } from "aws-sdk";
 import S3 from "aws-sdk/clients/s3";
-
-const cors = microCors();
 
 const typeDefs = gql`
   type FilePayload {
@@ -37,7 +33,6 @@ const get_s3_image = async ({ filePath }: { filePath: string }) => {
 
   const signedUrlExpireSeconds = 60 * 60 * 2; // 2 hours
 
-  // filePath = derived image path
   const url = await s3.getSignedUrlPromise("getObject", {
     Bucket: process.env.AWS_S3_STORAGE_BUCKET,
     Key: filePath,
@@ -63,12 +58,9 @@ const resolvers = {
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 export default apolloServer.start().then(() => {
-  const handler = apolloServer.createHandler({
+  return apolloServer.createHandler({
     path: "/api/file",
   });
-  return cors((req, res) =>
-    req.method === "OPTIONS" ? send(res, 200, "ok") : handler(req, res)
-  );
 });
 
 export const config = {
