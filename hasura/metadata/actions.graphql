@@ -1,0 +1,8 @@
+type Query {
+  Hello: HelloOutput
+}
+
+type HelloOutput {
+  res: String!
+}
+

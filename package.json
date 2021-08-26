@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/node": "^16.7.2",
+    "@vercel/node": "^1.12.1"
+  }
+}

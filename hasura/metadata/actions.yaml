@@ -1,6 +1,14 @@
-actions: []
+actions:
+- name: Hello
+  definition:
+    kind: ""
+    handler: '{{ACTION_BASE_URL}}/hello'
+    headers:
+    - name: verification_key
+      value_from_env: EVENT_SECRET_KEY
 custom_types:
   enums: []
   input_objects: []
-  objects: []
+  objects:
+  - name: HelloOutput
   scalars: []
